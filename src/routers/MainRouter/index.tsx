@@ -1,0 +1,35 @@
+import {Routes, useLocation} from "react-router";
+import { BrowserRouter } from "react-router";
+import {Route} from "react-router/internal/react-server-client";
+import {Home} from "../../pages/Home";
+import {AboutPomodoro} from "../../pages/AboutPomodoro";
+import {NotFound} from "../../pages/NotFound";
+import {useEffect} from "react";
+import {History} from "../../pages/History";
+import {Settings} from "../../pages/Settings";
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scroll({ top: 0, behavior: "smooth" });
+    }, [pathname]);
+
+    return null
+}
+
+export function MainRouter() {
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/history' element={<History />}/>
+                <Route path='/settings' element={<Settings />}/>
+                <Route path='/about-pomodoro' element={<AboutPomodoro />}/>
+                <Route path='*' element={<NotFound />}/>
+            </Routes>
+            <ScrollToTop />
+        </BrowserRouter>
+    )
+}
